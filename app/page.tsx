@@ -244,13 +244,13 @@ const Slideshow = () => {
 			</div>
 			<div className="flex justify-between items-center mt-4">
 				<button onClick={prev} className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
-					Prev
+					Préc
 				</button>
 				<div className="text-sm text-gray-600">
 					{index + 1} / {total}
 				</div>
 				<button onClick={next} className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
-					Next
+					Suiv
 				</button>
 			</div>
 			<div className="mt-2 text-center text-gray-700 font-semibold">{images[index].alt}</div>
