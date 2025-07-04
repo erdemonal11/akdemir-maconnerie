@@ -1,6 +1,116 @@
-import { Phone, Mail, MapPin, Hammer, Building, Home, Wrench } from "lucide-react"
+"use client"
+
+import { Phone, Mail, MapPin, Hammer, Building, Home, Wrench, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import Image from "next/image"
+
+import { useState } from "react"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+
+const images = [
+  {
+    id: 1,
+    src: "/placeholder.svg?height=600&width=800",
+    alt: "Projet de maçonnerie 1",
+    description: "Description du projet 1",
+  },
+  {
+    id: 2,
+    src: "/placeholder.svg?height=600&width=800",
+    alt: "Projet de maçonnerie 2",
+    description: "Description du projet 2",
+  },
+  {
+    id: 3,
+    src: "/placeholder.svg?height=600&width=800",
+    alt: "Projet de maçonnerie 3",
+    description: "Description du projet 3",
+  },
+  {
+    id: 4,
+    src: "/placeholder.svg?height=600&width=800",
+    alt: "Projet de maçonnerie 4",
+    description: "Description du projet 4",
+  },
+  {
+    id: 5,
+    src: "/placeholder.svg?height=600&width=800",
+    alt: "Projet de maçonnerie 5",
+    description: "Description du projet 5",
+  },
+  {
+    id: 6,
+    src: "/placeholder.svg?height=600&width=800",
+    alt: "Projet de maçonnerie 6",
+    description: "Description du projet 6",
+  },
+]
+
+const ImageGallery = () => {
+  const [open, setOpen] = useState(false)
+  const [selectedImage, setSelectedImage] = useState(null)
+
+  const handleOpen = (image) => {
+    setSelectedImage(image)
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+    setSelectedImage(null)
+  }
+
+  return (
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {images.map((image) => (
+          <Card key={image.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
+            <button
+              onClick={() => handleOpen(image)}
+              className="relative aspect-[4/3] overflow-hidden w-full h-full block"
+            >
+              <Image
+                src={image.src || "/placeholder.svg"}
+                alt={image.alt}
+                width={400}
+                height={300}
+                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                <ExternalLink className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            </button>
+            <CardContent className="p-4">
+              <h4 className="font-semibold text-lg mb-2">{image.alt}</h4>
+              <p className="text-gray-600 text-sm">{image.description}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-[720px]">
+          {selectedImage && (
+            <div className="flex flex-col">
+              <Image
+                src={selectedImage.src || "/placeholder.svg"}
+                alt={selectedImage.alt}
+                width={800}
+                height={600}
+                className="object-contain w-full h-auto"
+              />
+              <div className="mt-4">
+                <h4 className="font-semibold text-lg mb-2">{selectedImage.alt}</h4>
+                <p className="text-gray-600 text-sm">{selectedImage.description}</p>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
+  )
+}
 
 export default function HomePage() {
   return (
@@ -9,7 +119,9 @@ export default function HomePage() {
       <header className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl md:text-3xl font-bold text-red-600">AKDEMIR MAÇONNERIE</h1>
+            <div className="flex items-center">
+              <Image src="/logo.png" alt="Akdemir Maçonnerie Logo" width={200} height={80} className="h-16 w-auto" />
+            </div>
             <div className="hidden md:flex items-center space-x-6 text-sm">
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-red-600" />
@@ -32,13 +144,17 @@ export default function HomePage() {
             Spécialiste en travaux de maçonnerie à Annecy. Qualité, expertise et savoir-faire au service de vos projets.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-red-600 hover:bg-red-700">
-              <Phone className="mr-2 h-5 w-5" />
-              Appelez-nous
+            <Button size="lg" className="bg-red-600 hover:bg-red-700" asChild>
+              <a href="tel:0670591546">
+                <Phone className="mr-2 h-5 w-5" />
+                Appelez-nous
+              </a>
             </Button>
-            <Button variant="outline" size="lg">
-              <Mail className="mr-2 h-5 w-5" />
-              Contactez-nous
+            <Button variant="outline" size="lg" asChild>
+              <a href="mailto:akdemir.kemal@neuf.fr">
+                <Mail className="mr-2 h-5 w-5" />
+                Contactez-nous
+              </a>
             </Button>
           </div>
         </div>
@@ -98,8 +214,32 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Réalisations Section */}
       <section className="bg-gray-50 py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Nos Réalisations</h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Découvrez quelques-uns de nos projets récents et la qualité de notre travail
+            </p>
+          </div>
+
+          <ImageGallery />
+
+          <div className="text-center mt-8">
+            <p className="text-gray-600 mb-4">Vous avez un projet similaire ?</p>
+            <Button className="bg-red-600 hover:bg-red-700" asChild>
+              <a href="tel:0670591546">
+                <Phone className="mr-2 h-4 w-4" />
+                Demandez votre devis gratuit
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Contactez-nous</h3>
@@ -114,7 +254,9 @@ export default function HomePage() {
                   <CardTitle className="text-lg">Téléphone</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-lg font-semibold">06 70 59 15 46</p>
+                  <a href="tel:0670591546" className="text-lg font-semibold hover:text-red-600 transition-colors">
+                    06 70 59 15 46
+                  </a>
                   <p className="text-sm text-gray-600 mt-2">Disponible 7j/7</p>
                 </CardContent>
               </Card>
@@ -125,7 +267,12 @@ export default function HomePage() {
                   <CardTitle className="text-lg">Email</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-lg font-semibold break-all">akdemir.kemal@neuf.fr</p>
+                  <a
+                    href="mailto:akdemir.kemal@neuf.fr"
+                    className="text-lg font-semibold break-all hover:text-red-600 transition-colors"
+                  >
+                    akdemir.kemal@neuf.fr
+                  </a>
                   <p className="text-sm text-gray-600 mt-2">Réponse rapide</p>
                 </CardContent>
               </Card>
@@ -150,18 +297,29 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
-              <h4 className="text-xl font-bold text-red-500">AKDEMIR MAÇONNERIE</h4>
-              <p className="text-gray-400 text-sm mt-1">Votre expert en maçonnerie à Annecy</p>
+              <div className="flex items-center mb-2">
+                <Image
+                  src="/logo.png"
+                  alt="Akdemir Maçonnerie Logo"
+                  width={150}
+                  height={60}
+                  className="h-12 w-auto brightness-0 invert"
+                />
+              </div>
+              <p className="text-gray-400 text-sm">Votre expert en maçonnerie à Annecy</p>
             </div>
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm">
-              <div className="flex items-center space-x-2">
+              <a href="tel:0670591546" className="flex items-center space-x-2 hover:text-red-400 transition-colors">
                 <Phone className="h-4 w-4" />
                 <span>06 70 59 15 46</span>
-              </div>
-              <div className="flex items-center space-x-2">
+              </a>
+              <a
+                href="mailto:akdemir.kemal@neuf.fr"
+                className="flex items-center space-x-2 hover:text-red-400 transition-colors"
+              >
                 <Mail className="h-4 w-4" />
                 <span>akdemir.kemal@neuf.fr</span>
-              </div>
+              </a>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
                 <span>ANNECY</span>
