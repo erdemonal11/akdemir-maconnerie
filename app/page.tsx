@@ -504,7 +504,7 @@ export default function HomePage() {
                             </div>
                             {/* Option 1: Add LinkedIn next to existing contact info */}
                             <a
-                                href="YOUR_LINKEDIN_COMPANY_PAGE_URL" // Replace with your LinkedIn URL
+                                href="https://www.linkedin.com/company/akdemir-ma%C3%A7onnerie/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center space-x-2 hover:text-red-400 transition-colors"
