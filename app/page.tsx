@@ -498,11 +498,6 @@ export default function HomePage() {
                                 <Mail className="h-4 w-4" />
                                 <span>akdemir.kemal@neuf.fr</span>
                             </a>
-                            <div className="flex items-center space-x-2">
-                                <MapPin className="h-4 w-4" />
-                                <span>ANNECY</span>
-                            </div>
-                            {/* Option 1: Add LinkedIn next to existing contact info */}
                             <a
                                 href="https://www.linkedin.com/company/akdemir-ma%C3%A7onnerie/"
                                 target="_blank"
