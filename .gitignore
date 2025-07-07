@@ -1,0 +1,31 @@
+# dependencies
+node_modules/
+
+# next.js build output
+.next/
+
+# local env files
+.env*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# pnpm
+.pnpm-debug.log*
+
+# Optional: uncomment if you don't want to track lockfile
+# pnpm-lock.yaml 
