@@ -4,7 +4,6 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Akdemir Maçonnerie',
   description: 'Akdemir Maçonnerie : Maçonnerie professionnelle à Annecy et alentours. Construction, rénovation, réparation, démolition. Qualité, confiance et expertise.',
-  generator: 'v0.dev',
   keywords: [
     'maçonnerie',
     'Annecy',
@@ -64,6 +63,11 @@ export default function RootLayout({
         <meta name="twitter:title" content="Akdemir Maçonnerie" />
         <meta name="twitter:description" content="Akdemir Maçonnerie : Maçonnerie professionnelle à Annecy et alentours. Construction, rénovation, réparation, démolition. Qualité, confiance et expertise." />
         <meta name="twitter:image" content="/icon.png" />
+        <meta name="language" content="fr" />
+        <meta name="geo.region" content="FR" />
+        <meta name="geo.placename" content="Annecy" />
+        <meta name="distribution" content="global" />
+        <meta name="robots" content="index, follow" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: `{
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
